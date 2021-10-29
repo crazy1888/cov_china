@@ -1,0 +1,44 @@
+<!--测试用例，不在项目中-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../static/js/jquery.min.js"></script>
+    <link href="../static/css/main.css" rel="stylesheet">
+</head>
+<body>
+<h2>this is Index!</h2>
+<button class="Ajax">Ajax</button>
+<p class="content"></p>
+<div id="tim">时间</div>
+<script>
+    $(".Ajax").click(function () {
+        // 发送Ajax请求
+        $.ajax({
+            url: "/test_ajax",       // 请求url，不写ip和端口，默认使用这个脚本所在的地址和端口
+            type: "get",   // 请求方式，还有post请求
+            success: function (data) {   // 回调函数：事件执行完，对应执行的函数
+                console.log(data)
+                // 给html文本赋值
+                $(".content").html(data)
+            }
+        })
+    })
+    function gettime() {
+        $.ajax({
+            url: "/time",
+            timeout: 10000, //超时时间设置为10秒；
+            success: function (data) {
+                $("#tim").html(data)
+            },
+            error: function (xhr, type, errorThrown) {
+
+            }
+        });
+    }
+    gettime();
+</script>
+</body>
+</html>
